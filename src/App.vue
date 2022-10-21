@@ -1,30 +1,39 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="wrapper">
+    <router-view />
+    <footer>
+      <h2>Заметки</h2>
+  </footer>
+  </div>
 </template>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  font-family: 'Roboto';
+
 }
 
-nav {
-  padding: 30px;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+footer {
+  box-sizing: border-box;
+  background-color: #0070C5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 50px;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+footer h2 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  color: #FF6969;
+  margin: 0;
 }
 </style>
