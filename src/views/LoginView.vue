@@ -1,20 +1,20 @@
 <template>
   <header>
-    <img src="@/assets/logo.png" alt="logo" />
-    <router-link to="/register class='button'">Регистрация</router-link>
+    <router-link to="/"><img src="@/assets/logo.png" alt="logo" /></router-link>
+    <button to="/register class='button'">Регистрация</button>
   </header>
   <main>
     <img src="@/assets/notebook.png" alt="notebook" />
-    <form action="">
-      <input type="text" placeholder="Логин" />
-      <input type="password" placeholder="Пароль" />
-      <router-link to="/notes.html" class="button btn-login">Войти</router-link>
+    <form action="" @submit.prevent="login()" >
+      <input type="text" placeholder="Логин" v-model="user.login"/>
+      <input type="password" placeholder="Пароль" v-model="user.password" />
+      <button class="button btn-login">Войти</button>
     </form>
   </main>
 </template>
   
 <style scoped>
-/*Шапка*/
+
 header {
   display: flex;
   justify-content: space-between;
@@ -81,7 +81,35 @@ form button {
   text-decoration: none;
 }
 </style>
+<script setup>
+import router from "@/router";
+import { ref } from "@vue/reactivity";
 
-  <script>
+const USER = ref({login: "", password:""});
+
+async function login() {
+    const DATA = JSON.stringify(USER.value);
+    const headers = new Headers();
+    headers.append('Content-type', 'application/json');
+    const HOST = "https://d5dgts1m3v0mqtfns7nj.apigw.yandexcloud.net/"
+    let response = await fetch(HOST + 'login',{
+      method:"POST",
+      headers:headers,
+      body:DATA
+    });
+    switch(response.status){
+      case 200: {
+        let result = await response.json();
+        let token = result.token;
+        localStorage.setItem('token', token);
+        router.push("/");
+        break;
+      }
+      case 403: {
+        break;
+      }
+    }
+    console.log(response);
+  }
 </script>
   

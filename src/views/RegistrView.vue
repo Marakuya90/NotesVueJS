@@ -1,15 +1,15 @@
 <template>
   <header>
-    <img src="@/assets/logo.png" alt="logo" />
-    <a class="button" href="index.html">Вход</a>
+    <router-link to="/"><img src="@/assets/logo.png" alt="logo"></router-link>
+    <router-link class="button" to="/login">Вход</router-link>
   </header>
   <main>
     <img src="@/assets/register.png" alt="notebook" />
-    <form action="">
-      <input type="text" placeholder="Логин" />
-      <input type="password" placeholder="Пароль" />
-      <input type="password" placeholder="Подтверждение пароля" />
-      <button type="button">Регистрация</button>
+    <form action="" @submit.prevent="register()">
+      <input type="text" placeholder="Логин" v-model="USER.login"/>
+      <input type="password" placeholder="Пароль" v-model="USER.password"/>
+      <input type="password" placeholder="Подтверждение пароля" v-model="CONFIRM"/>
+      <button type="submit">Регистрация</button>
     </form>
   </main>
 </template>
@@ -81,5 +81,35 @@ form button {
   text-decoration: none;
 }
 </style>
-<script>
+<script setup>
+import { ref } from 'vue';
+
+const USER = ref({login: "", password:""});
+const CONFIRM = ref();
+async function register() {
+  if(USER.value.password == CONFIRM.value) {
+    const DATA = JSON.stringify(USER.value);
+    const headers = new Headers();
+    headers.append('Content-type', 'application/json');
+    const HOST = "https://d5dgts1m3v0mqtfns7nj.apigw.yandexcloud.net/"
+    let response = await fetch(HOST + 'signup',{
+      method:"POST",
+      headers:headers,
+      body:DATA
+    });
+    switch(response.status){
+      case 201: {
+        let result = await response.json();
+        let token = result.token;
+        localStorage.setItem('token', token);
+        break;
+      }
+      case 403: {
+        break;
+      }
+
+    }
+    console.log(response);
+  }
+}
 </script>

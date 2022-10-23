@@ -1,7 +1,7 @@
 <template>
   <header>
     <img src="@/assets/logo.png" alt="logo" />
-    <router-link to="/create" class="button btn-create"><img src="@/assets/btn-icon.png" alt="icon" />Создать заметку</router-link>
+    <router-link to="/new" class="button btn-create"><img src="@/assets/btn-icon.png" alt="icon"/>Создать заметку</router-link>
     <router-link to="/register" class="button">Выход</router-link>
   </header>
   <main>
