@@ -5,7 +5,7 @@
       ><img src="@/assets/btn-icon.png" alt="icon" />Создать
       заметку</router-link
     >
-    <button to="/register" class="button">Выход</button>
+    <router-link to="/register" class="button">Выход</router-link>
   </header>
   <div class="notes">
     <div class="note" v-for="note in notes" :key="note.id">
@@ -211,7 +211,7 @@ async function getNotes(){
   const token = localStorage.getItem("token");
   const host = "https://d5dgts1m3v0mqtfns7nj.apigw.yandexcloud.net/";
   let headers = new Headers();
-  headers.append("Autorization", "Bearer " + token);
+  headers.append("Authorization", "Bearer " + token);
   let response = await fetch(host + "notes", {
     headers: headers
   });

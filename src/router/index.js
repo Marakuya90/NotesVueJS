@@ -44,7 +44,7 @@ const router = createRouter({
 router.beforeEach((to) => {
   const publicPages = ["/register","/login"];
   const token = localStorage.getItem("token");
-  if(!publicPages.includes(to.path) && !token) {
+  if(!publicPages.includes(to.path) && !token){
     return "/login";
   }
 });

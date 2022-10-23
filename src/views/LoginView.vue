@@ -1,11 +1,11 @@
 <template>
   <header>
     <router-link to="/"><img src="@/assets/logo.png" alt="logo" /></router-link>
-    <button to="/register class='button'">Регистрация</button>
+    <router-link class='button' to="/register" >Регистрация</router-link>
   </header>
   <main>
-    <img src="@/assets/notebook.png" alt="notebook" />
-    <form action="" @submit.prevent="login()" >
+    <img src="@/assets/notebook.png" alt="notebook"/>
+    <form action="" @submit.prevent="login()">
       <input type="text" placeholder="Логин" v-model="user.login"/>
       <input type="password" placeholder="Пароль" v-model="user.password" />
       <button class="button btn-login">Войти</button>
@@ -83,19 +83,19 @@ form button {
 </style>
 <script setup>
 import router from "@/router";
-import { ref } from "@vue/reactivity";
+import { ref } from "vue";
 
-const USER = ref({login: "", password:""});
+const user = ref({login: "", password:""});
 
 async function login() {
-    const DATA = JSON.stringify(USER.value);
+    const data = JSON.stringify(user.value);
     const headers = new Headers();
     headers.append('Content-type', 'application/json');
     const HOST = "https://d5dgts1m3v0mqtfns7nj.apigw.yandexcloud.net/"
     let response = await fetch(HOST + 'login',{
       method:"POST",
       headers:headers,
-      body:DATA
+      body:data
     });
     switch(response.status){
       case 200: {
