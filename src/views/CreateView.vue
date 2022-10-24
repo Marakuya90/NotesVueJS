@@ -6,7 +6,7 @@
   </header>
   <main>
     <form action="" @submit.prevent="addNote()" class="new_note">
-      <button class="close_btn" type="button"></button>
+      <button class="close_btn" type="button" @click="closeNote()" ></button>
       <img :src="note.image" alt="image" v-if="note.image"/>
       <input type="text" placeholder="Заголовок заметки" v-model="note.title"/>
       <textarea placeholder="Текст заметки" v-model="note.body"></textarea>
@@ -122,6 +122,7 @@ form button {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 .new_note .buttons {
@@ -139,6 +140,7 @@ form button {
   background-position: center center;
   background-repeat: no-repeat;
   align-self: flex-end;
+  cursor: pointer;
 }
 
 </style>
@@ -168,5 +170,9 @@ else{
   console.log("Ошибка!");
 }
 console.log(response);
+}
+
+function closeNote(){
+  router.push("/");
 }
 </script>

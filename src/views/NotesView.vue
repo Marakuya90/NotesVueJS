@@ -13,7 +13,7 @@
       </div>
       <p>{{ note.body }}</p>
       <div class="buttons">
-        <button class="trash"></button>
+        <button class="trash" @click = "removeNote(note.id)"></button>
       </div>
     </div>
   </div>
@@ -207,7 +207,7 @@ import { onMounted, ref } from 'vue';
 const notes = ref();
 async function getNotes(){
   const token = localStorage.getItem("token");
-  const host = "https://d5dgts1m3v0mqtfns7nj.apigw.yandexcloud.net/";
+  const host = process.env.VUE_APP_HOST;
   let headers = new Headers();
   headers.append("Authorization", "Bearer " + token);
   let response = await fetch(host + "notes", {
@@ -219,5 +219,18 @@ async function getNotes(){
   }
 }
 
+async function removeNote(id){
+  const token = localStorage.getItem("token");
+  const host = process.env.VUE_APP_HOST;
+  const headers = new Headers();
+  headers.append("Authorization", "Bearer " + token);
+  let response = await fetch(host + "notes/" + id, {
+    method:"DELETE",
+    headers: headers
+  });
+  if(response.status == 200){
+    getNotes();
+  }
+}
 onMounted(getNotes)
 </script>
