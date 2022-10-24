@@ -2,12 +2,10 @@
   <header>
     <router-link to="/"><img src="@/assets/logo.png" alt="logo"></router-link>
     <router-link to="/new" class="button btn-create"
-      ><img src="@/assets/btn-icon.png" alt="icon" />Создать
-      заметку</router-link
-    >
+      ><img src="@/assets/btn-icon.png" alt="icon" />Создать заметку</router-link>
     <router-link to="/register" class="button">Выход</router-link>
   </header>
-  <div class="notes">
+  <div class="notes" @click="getNote(this.node.id)">
     <div class="note" v-for="note in notes" :key="note.id">
       <div class="title">
         <img :src="note.image" alt="note" />

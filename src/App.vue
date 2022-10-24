@@ -10,7 +10,6 @@
 <style>
 #app {
   font-family: 'Roboto';
-
 }
 
 .wrapper {

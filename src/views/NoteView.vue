@@ -1,27 +1,28 @@
 <template>
   <header>
-    <router-link to="/"><img src="@/assets/logo.png" alt="logo"></router-link>
-    <router-link to="/new" class="button btn-create"><img src="@/assets/btn-icon.png" alt="icon">Создать заметку</router-link>
+    <router-link to="/"><img src="@/assets/logo.png" alt="logo" /></router-link>
+    <router-link to="/new" class="button btn-create"
+      ><img src="@/assets/btn-icon.png" alt="icon" />Создать заметку</router-link>
     <button to="/register" class="button">Выход</button>
-</header>
-<main>
+  </header>
+  <main>
     <form action="" class="view_note">
-        <button class="close_btn" type="button"></button>
-        <div class="content">
-            <img src="@/assets/cat1.jpg" alt="">
-            <h2>Заголовок заметки</h2>
-            <p>Текст заметки</p>
-        </div>
-        <button class="trash"></button>
+      <button class="close_btn" type="button"></button>
+      <div class="content">
+        <img src="@/assets/cat1.jpg" alt="" />
+        <h2>Заголовок заметки</h2>
+        <p>Текст заметки</p>
+      </div>
+      <button class="trash"></button>
     </form>
-</main>
+  </main>
 </template>
 <style scoped>
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #0070C5;
+  background-color: #0070c5;
   padding: 20px 50px;
 }
 
@@ -31,18 +32,18 @@ header img {
 
 header .button {
   padding: 5px 15px;
-  border: 2px solid #FF6969;
+  border: 2px solid #ff6969;
   font-style: normal;
   font-weight: 700;
   font-size: 32px;
   line-height: 38px;
-  color: #FF6969;
+  color: #ff6969;
   background-color: transparent;
   text-decoration: none;
 }
 
 main {
-  background-color: #00D98D;
+  background-color: #00d98d;
   flex: 1;
   display: flex;
   align-items: center;
@@ -55,7 +56,7 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #FFD500;
+  background: #ffd500;
   align-items: center;
   padding: 100px;
   gap: 40px;
@@ -64,7 +65,7 @@ form {
 input,
 textarea {
   padding: 10px;
-  border: 2px solid #00D98D;
+  border: 2px solid #00d98d;
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -74,19 +75,19 @@ textarea {
 form .button,
 form button {
   padding: 5px 15px;
-  background: #FF6969;
+  background: #ff6969;
   font-style: normal;
   font-weight: 700;
   font-size: 32px;
   line-height: 38px;
-  color: #FFD500;
+  color: #ffd500;
   border: none;
   text-decoration: none;
 }
 
 footer {
   box-sizing: border-box;
-  background-color: #0070C5;
+  background-color: #0070c5;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,14 +98,14 @@ footer h2 {
   font-style: normal;
   font-weight: 700;
   font-size: 32px;
-  color: #FF6969;
+  color: #ff6969;
   margin: 0;
 }
 
 /*Создание заметки*/
 header .btn-create {
-  background-color: #FF6969;
-  color: #FFD500;
+  background-color: #ff6969;
+  color: #ffd500;
 }
 
 .btn-create img {
@@ -163,5 +164,6 @@ header .btn-create {
   align-self: center;
 }
 </style>
-<script>
+<script setup>
+
 </script>

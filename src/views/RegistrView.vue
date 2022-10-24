@@ -107,7 +107,6 @@ async function register() {
       case 403: {
         break;
       }
-
     }
     console.log(response);
   }

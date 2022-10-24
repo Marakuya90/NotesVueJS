@@ -5,12 +5,12 @@
     <router-link to="/register" class="button">Выход</router-link>
   </header>
   <main>
-    <form action="" class="new_note">
+    <form action="" @submit.prevent="addNote()" class="new_note">
       <button class="close_btn" type="button"></button>
-      <img src="@/assets/cat1.jpg" alt="cats" />
-      <input type="text" placeholder="Заголовок заметки" />
-      <textarea placeholder="Текст заметки"></textarea>
-      <input type="text" placeholder="Ссылка на изображение" />
+      <img :src="note.image" alt="image" v-if="note.image"/>
+      <input type="text" placeholder="Заголовок заметки" v-model="note.title"/>
+      <textarea placeholder="Текст заметки" v-model="note.body"></textarea>
+      <input type="text" placeholder="Ссылка на изображение" v-model="note.image">/
       <div class="buttons">
         <button class="save_btn"></button>
       </div>
@@ -109,7 +109,6 @@ form button {
 .new_note textarea {
   width: 100%;
 }
-
 .new_note img,
 .view_note img {
   height: 200px;
@@ -143,5 +142,31 @@ form button {
 }
 
 </style>
-<script>
+<script setup>
+
+import router from '@/router';
+import { ref } from '@vue/reactivity'
+
+router
+const note = ref({title:"",body:"",image:""});
+
+async function addNote() {
+  const data = JSON.stringify(note.value);
+  const token = localStorage.getItem('token');
+  const headers = new Headers();
+  headers.append("Authorization", "Bearer " + token);
+  headers.append("Content-Type","application/json");
+  let response = await fetch(process.env.VUE_APP_HOST + "/notes",{
+    method:"POST",
+    headers:headers,
+    body:data
+  });
+if(response.status == 201){
+  router.push("/");
+}
+else{
+  console.log("Ошибка!");
+}
+console.log(response);
+}
 </script>
