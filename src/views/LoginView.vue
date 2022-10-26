@@ -82,34 +82,14 @@ form button {
 }
 </style>
 <script setup>
-import router from "@/router";
 import { ref } from "vue";
+import { useAuthStore } from "@/store/auth";
 
 const user = ref({login: "", password:""});
 
 async function login() {
-    const data = JSON.stringify(user.value);
-    const headers = new Headers();
-    headers.append('Content-type', 'application/json');
-    const HOST = "https://d5dgts1m3v0mqtfns7nj.apigw.yandexcloud.net/"
-    let response = await fetch(HOST + 'login',{
-      method:"POST",
-      headers:headers,
-      body:data
-    });
-    switch(response.status){
-      case 200: {
-        let result = await response.json();
-        let token = result.token;
-        localStorage.setItem('token', token);
-        router.push("/");
-        break;
-      }
-      case 403: {
-        break;
-      }
-    }
-    console.log(response);
+  const authStore = useAuthStore();
+  authStore.login(user.value);
   }
 </script>
   
