@@ -2,7 +2,7 @@
   <header>
     <img src="@/assets/logo.png" alt="logo" />
     <router-link to="/new" class="button btn-create"><img src="@/assets/btn-icon.png" alt="icon"/>Создать заметку</router-link>
-    <router-link to="/register" class="button">Выход</router-link>
+    <button class="button" @click = "logout()">Выход</button>
   </header>
   <main>
     <form action="" @submit.prevent="addNote()" class="new_note">
@@ -147,6 +147,7 @@ form button {
 <script setup>
 
 import router from '@/router';
+import { useAuthStore } from '@/store/auth';
 import { ref } from '@vue/reactivity'
 
 router
@@ -174,5 +175,10 @@ console.log(response);
 
 function closeNote(){
   router.push("/");
+}
+
+function logout(){
+  const authStore = useAuthStore();
+  authStore.logout();
 }
 </script>

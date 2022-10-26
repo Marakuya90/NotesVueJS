@@ -27,12 +27,11 @@ const routes = [
     name: 'new',
     component: CreateView
   },
-
   {
-    path: '/note',
+    path: '/notes:id',
     name: 'note',
     component: NoteView
-  },
+  }
 
 ];
 

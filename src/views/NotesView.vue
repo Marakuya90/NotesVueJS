@@ -3,10 +3,10 @@
     <router-link to="/"><img src="@/assets/logo.png" alt="logo"></router-link>
     <router-link to="/new" class="button btn-create"
       ><img src="@/assets/btn-icon.png" alt="icon" />Создать заметку</router-link>
-    <router-link to="/register" class="button">Выход</router-link>
+    <button class="button" @click = "logout()">Выход</button>
   </header>
-  <div class="notes" @click="getNote(this.node.id)">
-    <div class="note" v-for="note in notes" :key="note.id">
+  <div class="notes">
+    <div class="note" v-for="note in notes" :key="note.id" @click="show()">
       <div class="title">
         <img :src="note.image" alt="note" />
         <h3>{{ note.title }}</h3>
@@ -203,7 +203,11 @@ header .btn-create {
 
 </style>
 <script setup>
+
+import router from '@/router';
+import { useAuthStore } from '@/store/auth';
 import { onMounted, ref } from 'vue';
+
 const notes = ref();
 async function getNotes(){
   const token = localStorage.getItem("token");
@@ -232,5 +236,15 @@ async function removeNote(id){
     getNotes();
   }
 }
+
+function logout(){
+  const authStore = useAuthStore();
+  authStore.logout();
+}
+
+function show(){
+  router.push("/notes")
+}
+
 onMounted(getNotes)
 </script>

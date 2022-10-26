@@ -3,7 +3,7 @@
     <router-link to="/"><img src="@/assets/logo.png" alt="logo" /></router-link>
     <router-link to="/new" class="button btn-create"
       ><img src="@/assets/btn-icon.png" alt="icon" />Создать заметку</router-link>
-    <button to="/register" class="button">Выход</button>
+      <button class="button" @click = "logout()">Выход</button>
   </header>
   <main>
     <form action="" class="view_note">
@@ -165,5 +165,10 @@ header .btn-create {
 }
 </style>
 <script setup>
+import { useAuthStore } from '@/store/auth';
 
+function logout(){
+  const authStore = useAuthStore();
+  authStore.logout();
+}
 </script>
