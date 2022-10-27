@@ -6,7 +6,7 @@
     <button class="button" @click = "logout()">Выход</button>
   </header>
   <div class="notes">
-    <div class="note" v-for="note in notes" :key="note.id" @click="show()">
+    <div class="note" v-for="note in notes" :key="note.id" @click="show(note)">
       <div class="title">
         <img :src="note.image" alt="note" />
         <h3>{{ note.title }}</h3>
@@ -219,7 +219,6 @@ async function getNotes(){
   });
   if(response.status == "200"){
     notes.value = await response.json();
-    console.log(notes.value);
   }
 }
 
@@ -242,8 +241,8 @@ function logout(){
   authStore.logout();
 }
 
-function show(){
-  router.push("/notes")
+function show(note){
+  router.push({name: "note", params: { note: note.id }})
 }
 
 onMounted(getNotes)

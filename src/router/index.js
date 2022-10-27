@@ -28,7 +28,7 @@ const routes = [
     component: CreateView
   },
   {
-    path: '/notes:id',
+    path: '/notes/:note',
     name: 'note',
     component: NoteView
   }

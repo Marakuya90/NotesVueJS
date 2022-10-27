@@ -9,9 +9,9 @@
     <form action="" class="view_note">
       <button class="close_btn" type="button"></button>
       <div class="content">
-        <img src="@/assets/cat1.jpg" alt="" />
-        <h2>Заголовок заметки</h2>
-        <p>Текст заметки</p>
+        <img :src="note.image" alt="" />
+        <h2>{{ note.title }}</h2>
+        <p>{{ note.body }}</p>
       </div>
       <button class="trash"></button>
     </form>
@@ -166,9 +166,30 @@ header .btn-create {
 </style>
 <script setup>
 import { useAuthStore } from '@/store/auth';
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+
+let route = useRoute();
+const noteId = route.params.note;
+const note = ref({title:"", body:"", image:""});
 
 function logout(){
   const authStore = useAuthStore();
   authStore.logout();
 }
+
+async function getNote(){
+  const authStore = useAuthStore();
+  const token = authStore.token;
+  const headers = new Headers()
+  headers.append("Authorization", "Bearer " + token);
+  const response = await fetch(process.env.VUE_APP_HOST + "notes/" + noteId, {
+    headers:headers
+  });
+  if(response.status == 200){
+    note.value = await response.json();
+  }
+}
+
+onMounted(getNote);
 </script>
